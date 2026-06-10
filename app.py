@@ -1,4 +1,5 @@
 import random
+import sqlite3
 from flask import Flask, render_template
 import os
 import pandas as pd
@@ -17,6 +18,15 @@ def map_page():
 @app.route("/api")
 def api():
     return {"x": random.randint(2,100)}
+
+@app.route("/players/count")
+def players_count():
+    con = sqlite3.connect("players.db")
+    cursor = con.cursor()
+    cursor.execute("SELECT COUNT(*) FROM players")
+    count = cursor.fetchone()[0]
+    con.close()
+    return {"count": count}
 
 @app.route("/getData/<int:year>")
 def getData(year):
