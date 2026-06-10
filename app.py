@@ -1,3 +1,4 @@
+import random
 from flask import Flask, render_template
 import os
 import pandas as pd
@@ -12,6 +13,10 @@ def w209():
 @app.route("/map")
 def map_page():
     return render_template("map.html")
+
+@app.route("/api")
+def api():
+    return {"x": random.randint(2,100)}
 
 @app.route("/getData/<int:year>")
 def getData(year):
