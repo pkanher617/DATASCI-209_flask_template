@@ -21,7 +21,7 @@ def api():
 
 @app.route("/players/count")
 def players_count():
-    con = sqlite3.connect("players.db")
+    con = sqlite3.connect("players_20.db")
     cursor = con.cursor()
     cursor.execute("SELECT COUNT(*) FROM players")
     count = cursor.fetchone()[0]
