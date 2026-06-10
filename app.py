@@ -15,7 +15,7 @@ def map_page():
 
 @app.route("/getData/<int:year>")
 def getData(year):
-    revenue = pd.read_csv(os.path.join(_HERE, "..", "static", "data", "1_Revenues.csv"))
+    revenue = pd.read_csv(os.path.join(_HERE, "static", "data", "1_Revenues.csv"))
     if year < 1942 or year > 2008:
         return "Error in the year range"
     filtered = revenue[revenue["Year4"] == year][
