@@ -1,6 +1,6 @@
 import random
 import sqlite3
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import os
 import pandas as pd
 app = Flask(__name__)
@@ -28,8 +28,9 @@ def players_count():
     con.close()
     return {"count": count}
 
-@app.route("/players/get_nationality/<str:player_name>")
-def get_nationality(player_name):
+@app.route("/players/get_nationality")
+def get_nationality():
+    player_name = request.args.get("player")
     con = sqlite3.connect("players_20.db")
     cursor = con.cursor()
     cursor.execute("SELECT nationality FROM players WHERE name = ?", (player_name,))
