@@ -28,6 +28,18 @@ def players_count():
     con.close()
     return {"count": count}
 
+@app.route("/players/get_nationality/<str:player_name>")
+def get_nationality(player_name):
+    con = sqlite3.connect("players_20.db")
+    cursor = con.cursor()
+    cursor.execute("SELECT nationality FROM players WHERE name = ?", (player_name,))
+    nationality = cursor.fetchone()
+    con.close()
+    if nationality:
+        return {"nationality": nationality[0]}
+    else:
+        return {"error": "Player not found"}
+
 @app.route("/getData/<int:year>")
 def getData(year):
     revenue = pd.read_csv(os.path.join(_HERE, "static", "data", "1_Revenues.csv"))
