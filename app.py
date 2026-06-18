@@ -15,6 +15,10 @@ def w209():
 def map_page():
     return render_template("map.html")
 
+@app.route("/embed")
+def embed_page():
+    return render_template("embed.html")
+
 @app.route("/api")
 def api():
     return {"x": random.randint(2,100)}
